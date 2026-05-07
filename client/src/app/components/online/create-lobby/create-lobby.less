@@ -1,0 +1,58 @@
+@import "../../../styles/buttons.less";
+@import "../../../styles/common.less";
+@import "../../../styles/colors.less";
+
+.flex-center {
+	height: 100%;
+	font-family: monospace;
+
+	h1{
+		font-size: 1.75rem;
+		text-align: center;
+	}
+
+	>div,
+	>div>div {
+		display: flex;
+		flex-direction: column;
+	}
+
+	>div{
+		background-color: @contentBg;
+		border-radius: 6px;
+		padding: 1rem;
+	}
+
+	>div>*{
+		margin-bottom: 1rem;
+	}
+
+	label{
+		font-size: 0.8rem;
+		margin-bottom: 0.1rem;
+	}
+}
+
+.sizes-list{
+	display: flex;
+	flex-direction: row;
+	margin-top: 0.5rem;
+
+	@size: 2rem;
+
+	>div{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: @size;
+		height: @size;
+		margin-right: 0.1rem;
+		border-radius: 6px;
+		cursor: pointer;
+
+		&.selected {
+			background-color: @hoverColor;
+			color: brown;
+		}
+	}
+}

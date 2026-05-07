@@ -1,0 +1,47 @@
+@import "../../../styles/buttons.less";
+@import "../../../styles/common.less";
+@import "../../../styles/colors.less";
+
+.flex-center {
+	height: 100%;
+	font-family: monospace;
+
+	h1 {
+		font-size: 1.75rem;
+		text-align: center;
+	}
+
+	>div,
+	>div>div {
+		display: flex;
+		flex-direction: column;
+	}
+
+	>div {
+		width: 100%;
+		max-width: 30rem;
+		height: max-content;
+		background-color: @contentBg;
+		border-radius: 6px;
+		padding: 1rem;
+	}
+
+	>div>* {
+		margin-bottom: 1rem;
+	}
+
+	button{
+		width: max-content;
+		align-self: center;
+	}
+
+	label {
+		font-size: 0.8rem;
+		margin-bottom: 0.1rem;
+	}
+}
+
+.message{
+	margin-bottom: 1rem;
+	text-align: center;
+}

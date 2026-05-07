@@ -1,0 +1,103 @@
+<div>
+	<div id="board-container"
+		#boardContainer
+		(pointermove)="onPointerMove($event)"
+		(pointerdown)="onPointerDown($event)"
+		(pointerleave)="onPointerLeave($event)"
+		(pointerenter)="onPointerEnter($event)"
+		[ngClass]="{ 'disable-input': game.isStopInput() }"
+	>
+		<div #cursor id="cursor" class="custom-cursor"></div>
+
+		<div id="board">
+			@for(row of game.board.board; track $index; let rIdx = $index) {
+				<div class="row">
+					@if(rIdx % 2 !== 0) {
+						@for(col of row; track $index; let cIdx = $index) {
+							@if(cIdx % 2 === 0) {
+								<div
+									class="plank-cell horizontal"
+									[ngClass]="{
+										'plank-placed': col === Entity.Plank
+									}"
+									[id]="toId(rIdx, cIdx)"
+								></div>
+							} @else {
+								<div
+									class="plank-cell mid"
+									[ngClass]="{
+										'plank-placed': col === Entity.Plank
+									}"
+									[id]="toId(rIdx, cIdx)"
+								></div>
+							}
+						}
+					} @else {
+						@for(col of row; track $index; let cIdx = $index) {
+							@if(cIdx % 2 === 0) {
+								<div
+									class="move-cell"
+									[id]="toId(rIdx, cIdx)"
+									[ngClass]="{
+										'possible-move': possibleMoves().has(toId(rIdx, cIdx))
+									}"
+								>
+									@if(toId(rIdx, cIdx) in game.playerPosHash()) {
+										<div
+											class="player"
+											[id]="toId(rIdx, cIdx)"
+											[ngStyle]="{
+												backgroundColor: game.playerPosHash()[toId(rIdx, cIdx)].color,
+											}"
+											[ngClass]="{
+												'disable-input':
+													this.game.players[game.curPlayerIdx()].color !==
+													game.playerPosHash()[toId(rIdx, cIdx)].color
+											}"
+										></div>
+									}
+								</div>
+							} @else{
+								<div
+									class="plank-cell vertical"
+									[ngClass]="{
+										'plank-placed': col === Entity.Plank
+									}"
+									[id]="toId(rIdx, cIdx)"
+								></div>
+							}
+						}
+					}
+				</div>
+			}
+		</div>
+
+		@if(game.isGameOver()) {
+			<div id="game-over-container">
+				<h1>Game Over</h1>
+
+				<div id="ranking-list">
+					@for(rank of game.ranks; track $index) {
+						<div>
+							<div [ngStyle]="{ 'color': rank.color }">#{{ $index + 1 }}</div>
+							<div>{{ rank.name }}</div>
+						</div>
+					}
+				</div>
+
+				<div>
+					<button class="btn" (click)="goToHome()">Home</button>
+				</div>
+			</div>
+		}
+
+		<div
+			class="plank"
+			id="plank"
+			[ngClass]="{
+				'disabled-plank': game.players[game.curPlayerIdx()].planksLeft() <= 0
+			}"
+		>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,63 @@
+@import "../../../styles/buttons.less";
+@import "../../../styles/common.less";
+@import "../../../styles/colors.less";
+
+.flex-center {
+	height: 100%;
+	font-family: monospace;
+
+	h1 {
+		font-size: 1.75rem;
+		text-align: center;
+	}
+
+	>div,
+	>div>div {
+		display: flex;
+		flex-direction: column;
+	}
+
+	>div {
+		background-color: @contentBg;
+		border-radius: 6px;
+		padding: 1rem;
+	}
+
+	>div>* {
+		margin-bottom: 1rem;
+	}
+
+	label {
+		font-size: 0.8rem;
+		margin-bottom: 0.1rem;
+	}
+}
+
+.colors {
+	display: flex;
+	flex-direction: row;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+
+	div {
+		@size: 2.5rem;
+		width: @size;
+		height: @size;
+		border-radius: 6px;
+		margin-right: 0.5rem;
+		cursor: pointer;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+		&:hover {
+			box-shadow: 0 0 10px @hoverColor;
+		}
+
+		&.selected {
+			outline: 2px solid white;
+		}
+	}
+}
+
+.err-msg{
+	color: rgb(255, 150, 150);
+}
